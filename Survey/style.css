@@ -1,0 +1,122 @@
+/* ------------------------------ */
+/* AI Background Pattern */
+/* ------------------------------ */
+body {
+    margin: 0;
+    background: #0a0a0a url("images/ai bg.jpg");
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    color: #e6e6e6;
+}
+
+/* ------------------------------ */
+/* Banner Section */
+/* ------------------------------ */
+.banner {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.banner h1 {
+    color: #1595d1;
+    text-shadow: 0 0 10px #1595d1;
+}
+
+.banner p {
+    opacity: 0.8;
+}
+
+.robot-img {
+    width: 110px;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* ------------------------------ */
+/* Progress Bar */
+/* ------------------------------ */
+.progress-container {
+    width: 100%;
+    background: #111;
+    height: 6px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #1595d1;
+    width: 0%;
+    transition: width 0.2s;
+}
+
+/* ------------------------------ */
+/* Form Container */
+/* ------------------------------ */
+.container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: rgba(12, 12, 12, 0.85);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.18);
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeIn 1.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Labels */
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: 500;
+}
+
+/* Dropdowns with glow hover */
+.ai-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #1595d1;
+    background: #1b1b1b;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.ai-input:hover {
+    box-shadow: 0 0 10px #1595d1;
+}
+
+/* Button glow */
+.btn-glow {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    font-size: 16px;
+    background: #1595d1;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-glow:hover {
+    background: #1595d1;
+    box-shadow: 0 0 18px #1595d1;
+}
